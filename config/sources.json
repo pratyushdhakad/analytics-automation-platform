@@ -1,0 +1,56 @@
+{
+  "contract_version": "1.0.0",
+  "fixture_as_of": "2026-08-20T12:00:00Z",
+  "sources": [
+    {
+      "name": "orders",
+      "path": "data/source/orders.csv",
+      "primary_key": ["order_id"],
+      "freshness_field": "updated_at",
+      "max_lag_hours": 24,
+      "columns": {
+        "order_id": {"type": "string", "required": true},
+        "order_date": {"type": "date", "required": true},
+        "customer_id": {"type": "string", "required": true},
+        "region": {"type": "string", "required": true, "accepted_values": ["Midwest", "Northeast", "South", "West"]},
+        "gross_revenue_usd": {"type": "decimal", "required": true, "min": 0},
+        "status": {"type": "string", "required": true, "accepted_values": ["completed", "refunded"]},
+        "updated_at": {"type": "datetime", "required": true}
+      }
+    },
+    {
+      "name": "refunds",
+      "path": "data/source/refunds.csv",
+      "primary_key": ["refund_id"],
+      "freshness_field": "updated_at",
+      "max_lag_hours": 24,
+      "columns": {
+        "refund_id": {"type": "string", "required": true},
+        "order_id": {"type": "string", "required": true},
+        "refund_date": {"type": "date", "required": true},
+        "refund_amount_usd": {"type": "decimal", "required": true, "min": 0},
+        "reason": {"type": "string", "required": true, "accepted_values": ["damaged", "late_delivery", "product_fit"]},
+        "updated_at": {"type": "datetime", "required": true}
+      },
+      "foreign_keys": [
+        {"columns": ["order_id"], "references_source": "orders", "references_columns": ["order_id"]}
+      ]
+    },
+    {
+      "name": "ad_spend",
+      "path": "data/source/ad_spend.csv",
+      "primary_key": ["spend_date", "channel"],
+      "freshness_field": "updated_at",
+      "max_lag_hours": 24,
+      "columns": {
+        "spend_date": {"type": "date", "required": true},
+        "channel": {"type": "string", "required": true, "accepted_values": ["paid_search", "paid_social", "retargeting"]},
+        "spend_usd": {"type": "decimal", "required": true, "min": 0},
+        "clicks": {"type": "integer", "required": true, "min": 0},
+        "conversions": {"type": "integer", "required": true, "min": 0},
+        "updated_at": {"type": "datetime", "required": true}
+      }
+    }
+  ]
+}
+
