@@ -1,0 +1,42 @@
+{
+  "contract_version": "1.0.0",
+  "fixture_as_of": "2026-08-20T12:00:00Z",
+  "publish_gate": "PASS",
+  "run_id": "fixture-20260820-0a97b13da0",
+  "run_type": "deterministic_fixture",
+  "source_count": 3,
+  "sources": [
+    {
+      "latest_record_at": "2026-08-20T08:05:00Z",
+      "name": "orders",
+      "path": "data/source/orders.csv",
+      "primary_key": [
+        "order_id"
+      ],
+      "row_count": 12,
+      "sha256": "6007ba0d29cb2d546061bb21eb6e65a5a096c50a9516458315878a6621fb0c89"
+    },
+    {
+      "latest_record_at": "2026-08-20T08:12:00Z",
+      "name": "refunds",
+      "path": "data/source/refunds.csv",
+      "primary_key": [
+        "refund_id"
+      ],
+      "row_count": 2,
+      "sha256": "1c1c91cb25ecc638ba66fb9ff7c0458a2094234fa79bd63b26915b905303cfff"
+    },
+    {
+      "latest_record_at": "2026-08-20T07:45:00Z",
+      "name": "ad_spend",
+      "path": "data/source/ad_spend.csv",
+      "primary_key": [
+        "spend_date",
+        "channel"
+      ],
+      "row_count": 9,
+      "sha256": "df62ba76ed181c1a4d336be9c27c10af205744ce40f68735d3a01cd889d1c50b"
+    }
+  ],
+  "total_rows": 23
+}

@@ -1,0 +1,87 @@
+{
+  "check_count": 13,
+  "checks": [
+    {
+      "check": "schema",
+      "detail": "7 expected columns present",
+      "source": "orders",
+      "status": "PASS"
+    },
+    {
+      "check": "values",
+      "detail": "12 rows satisfy required, type, domain, and range rules",
+      "source": "orders",
+      "status": "PASS"
+    },
+    {
+      "check": "primary_key",
+      "detail": "12 unique keys",
+      "source": "orders",
+      "status": "PASS"
+    },
+    {
+      "check": "freshness",
+      "detail": "latest=2026-08-20T08:05:00Z; lag_hours=3.92",
+      "source": "orders",
+      "status": "PASS"
+    },
+    {
+      "check": "schema",
+      "detail": "6 expected columns present",
+      "source": "refunds",
+      "status": "PASS"
+    },
+    {
+      "check": "values",
+      "detail": "2 rows satisfy required, type, domain, and range rules",
+      "source": "refunds",
+      "status": "PASS"
+    },
+    {
+      "check": "primary_key",
+      "detail": "2 unique keys",
+      "source": "refunds",
+      "status": "PASS"
+    },
+    {
+      "check": "freshness",
+      "detail": "latest=2026-08-20T08:12:00Z; lag_hours=3.80",
+      "source": "refunds",
+      "status": "PASS"
+    },
+    {
+      "check": "schema",
+      "detail": "6 expected columns present",
+      "source": "ad_spend",
+      "status": "PASS"
+    },
+    {
+      "check": "values",
+      "detail": "9 rows satisfy required, type, domain, and range rules",
+      "source": "ad_spend",
+      "status": "PASS"
+    },
+    {
+      "check": "primary_key",
+      "detail": "9 unique keys",
+      "source": "ad_spend",
+      "status": "PASS"
+    },
+    {
+      "check": "freshness",
+      "detail": "latest=2026-08-20T07:45:00Z; lag_hours=4.25",
+      "source": "ad_spend",
+      "status": "PASS"
+    },
+    {
+      "check": "foreign_key:order_id->orders",
+      "detail": "all 2 keys resolve",
+      "source": "refunds",
+      "status": "PASS"
+    }
+  ],
+  "contract_version": "1.0.0",
+  "failed_check_count": 0,
+  "fixture_as_of": "2026-08-20T12:00:00Z",
+  "status": "PASS"
+}
