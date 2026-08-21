@@ -71,7 +71,8 @@ class ContractTests(unittest.TestCase):
         for source in REGISTRY["sources"]:
             _, datasets[source["name"]] = load_rows(ROOT / source["path"])
         checks = validate_foreign_keys(REGISTRY, datasets)
-        self.assertEqual([check.status for check in checks], ["PASS"])
+        self.assertEqual(len(checks), 3)
+        self.assertTrue(all(check.status == "PASS" for check in checks))
 
     def test_orphan_refund_fails_relationship(self):
         datasets = {}
@@ -83,9 +84,8 @@ class ContractTests(unittest.TestCase):
 
     def test_registry_is_valid_json(self):
         payload = json.loads((ROOT / "config" / "sources.json").read_text())
-        self.assertEqual(payload["contract_version"], "1.0.0")
+        self.assertEqual(payload["contract_version"], "2.0.0")
 
 
 if __name__ == "__main__":
     unittest.main()
-

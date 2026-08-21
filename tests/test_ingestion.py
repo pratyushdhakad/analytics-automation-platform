@@ -20,8 +20,8 @@ class IngestionTests(unittest.TestCase):
             self.fixture_root(target)
             manifest = run_ingestion(target)
             self.assertEqual(manifest["publish_gate"], "PASS")
-            self.assertEqual(manifest["source_count"], 3)
-            self.assertEqual(manifest["total_rows"], 23)
+            self.assertEqual(manifest["source_count"], 6)
+            self.assertEqual(manifest["total_rows"], 8791)
 
     def test_pipeline_writes_all_raw_sources(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -29,7 +29,17 @@ class IngestionTests(unittest.TestCase):
             self.fixture_root(target)
             run_ingestion(target)
             outputs = sorted(path.name for path in (target / "artifacts" / "raw").glob("*.csv"))
-            self.assertEqual(outputs, ["ad_spend.csv", "orders.csv", "refunds.csv"])
+            self.assertEqual(
+                outputs,
+                [
+                    "ad_spend.csv",
+                    "affiliates_daily.csv",
+                    "marketing_daily.csv",
+                    "orders.csv",
+                    "refunds.csv",
+                    "revenue_daily.csv",
+                ],
+            )
 
     def test_run_id_is_deterministic(self):
         first = build_run_id("1.0.0", "2026-08-20T12:00:00Z")
@@ -53,4 +63,3 @@ class IngestionTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
