@@ -1,0 +1,31 @@
+{
+  "metric_contract_version": "1.0.0",
+  "grain": "one row per activity_date",
+  "metrics": {
+    "net_revenue_usd": {
+      "definition": "gross_revenue_usd - refunds_usd",
+      "decision_use": "Primary forecast target after recognized refunds"
+    },
+    "shipped_revenue_usd": {
+      "definition": "Value released from the modeled fulfillment backlog subject to daily capacity",
+      "decision_use": "Distinguishes commercial demand from fulfillment realization"
+    },
+    "revenue_to_ship_gap_usd": {
+      "definition": "net_revenue_usd - shipped_revenue_usd",
+      "decision_use": "Daily pressure signal; may be negative when prior backlog is cleared"
+    },
+    "marketing_efficiency_ratio": {
+      "definition": "gross_revenue_usd / total_marketing_spend_usd",
+      "decision_use": "Predictive planning ratio, not a causal ROAS claim"
+    },
+    "affiliate_revenue_share": {
+      "definition": "affiliate_revenue_usd / gross_revenue_usd",
+      "decision_use": "Monitors affiliate contribution and concentration"
+    },
+    "net_revenue_yoy_pct": {
+      "definition": "Percent change from the observation 365 days earlier",
+      "decision_use": "Separates growth from recurring annual seasonality"
+    }
+  }
+}
+

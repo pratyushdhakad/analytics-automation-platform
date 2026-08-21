@@ -1,5 +1,5 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "2.0.0",
   "fixture_as_of": "2026-08-20T12:00:00Z",
   "sources": [
     {
@@ -50,7 +50,65 @@
         "conversions": {"type": "integer", "required": true, "min": 0},
         "updated_at": {"type": "datetime", "required": true}
       }
+    },
+    {
+      "name": "revenue_daily",
+      "path": "data/source/revenue_daily.csv",
+      "primary_key": ["activity_date"],
+      "freshness_field": "updated_at",
+      "max_lag_hours": 24,
+      "columns": {
+        "activity_date": {"type": "date", "required": true},
+        "gross_revenue_usd": {"type": "decimal", "required": true, "min": 0},
+        "refunds_usd": {"type": "decimal", "required": true, "min": 0},
+        "net_revenue_usd": {"type": "decimal", "required": true, "min": 0},
+        "orders": {"type": "integer", "required": true, "min": 0},
+        "units_sold": {"type": "integer", "required": true, "min": 0},
+        "shipped_revenue_usd": {"type": "decimal", "required": true, "min": 0},
+        "units_shipped": {"type": "integer", "required": true, "min": 0},
+        "ending_backlog_revenue_usd": {"type": "decimal", "required": true, "min": 0},
+        "stockout_rate": {"type": "decimal", "required": true, "min": 0},
+        "event_name": {"type": "string", "required": true, "accepted_values": ["none", "monthly_promotion", "summer_event", "holiday_peak"]},
+        "updated_at": {"type": "datetime", "required": true}
+      }
+    },
+    {
+      "name": "marketing_daily",
+      "path": "data/source/marketing_daily.csv",
+      "primary_key": ["activity_date", "channel"],
+      "freshness_field": "updated_at",
+      "max_lag_hours": 24,
+      "columns": {
+        "activity_date": {"type": "date", "required": true},
+        "channel": {"type": "string", "required": true, "accepted_values": ["paid_search", "paid_social", "retargeting", "email"]},
+        "spend_usd": {"type": "decimal", "required": true, "min": 0},
+        "impressions": {"type": "integer", "required": true, "min": 0},
+        "clicks": {"type": "integer", "required": true, "min": 0},
+        "attributed_orders": {"type": "integer", "required": true, "min": 0},
+        "updated_at": {"type": "datetime", "required": true}
+      },
+      "foreign_keys": [
+        {"columns": ["activity_date"], "references_source": "revenue_daily", "references_columns": ["activity_date"]}
+      ]
+    },
+    {
+      "name": "affiliates_daily",
+      "path": "data/source/affiliates_daily.csv",
+      "primary_key": ["activity_date", "partner"],
+      "freshness_field": "updated_at",
+      "max_lag_hours": 24,
+      "columns": {
+        "activity_date": {"type": "date", "required": true},
+        "partner": {"type": "string", "required": true, "accepted_values": ["creator_collective", "cashback_network", "editorial_partner"]},
+        "clicks": {"type": "integer", "required": true, "min": 0},
+        "orders": {"type": "integer", "required": true, "min": 0},
+        "revenue_usd": {"type": "decimal", "required": true, "min": 0},
+        "commission_usd": {"type": "decimal", "required": true, "min": 0},
+        "updated_at": {"type": "datetime", "required": true}
+      },
+      "foreign_keys": [
+        {"columns": ["activity_date"], "references_source": "revenue_daily", "references_columns": ["activity_date"]}
+      ]
     }
   ]
 }
-
