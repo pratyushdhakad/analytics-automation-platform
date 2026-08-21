@@ -1,10 +1,16 @@
-.PHONY: ingest run test
+.PHONY: generate ingest metrics run test
 
-ingest:
+generate:
+	PYTHONPATH=src python3 -m analytics_automation_platform.history
+
+ingest: generate
+	PYTHONPATH=src python3 -m analytics_automation_platform.ingestion
+
+metrics: ingest
+	PYTHONPATH=src python3 -m analytics_automation_platform.metrics
+
+run:
 	PYTHONPATH=src python3 -m analytics_automation_platform.pipeline
-
-run: ingest
 
 test:
 	PYTHONPATH=src python3 -m unittest discover -s tests -v
-
