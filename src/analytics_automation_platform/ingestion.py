@@ -105,3 +105,15 @@ def run_ingestion(root: Path) -> dict[str, Any]:
     write_json(root / "artifacts" / "ingestion_manifest.json", manifest)
     return manifest
 
+
+def main() -> None:
+    root = Path(__file__).resolve().parents[2]
+    manifest = run_ingestion(root)
+    print(
+        "Ingestion gate {publish_gate}: {source_count} sources, {total_rows} rows, "
+        "run {run_id}".format(**manifest)
+    )
+
+
+if __name__ == "__main__":
+    main()
