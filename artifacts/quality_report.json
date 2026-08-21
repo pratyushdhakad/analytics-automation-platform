@@ -1,5 +1,5 @@
 {
-  "check_count": 13,
+  "check_count": 27,
   "checks": [
     {
       "check": "schema",
@@ -74,13 +74,97 @@
       "status": "PASS"
     },
     {
+      "check": "schema",
+      "detail": "12 expected columns present",
+      "source": "revenue_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "values",
+      "detail": "1096 rows satisfy required, type, domain, and range rules",
+      "source": "revenue_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "primary_key",
+      "detail": "1096 unique keys",
+      "source": "revenue_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "freshness",
+      "detail": "latest=2026-08-20T09:00:00Z; lag_hours=3.00",
+      "source": "revenue_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "schema",
+      "detail": "7 expected columns present",
+      "source": "marketing_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "values",
+      "detail": "4384 rows satisfy required, type, domain, and range rules",
+      "source": "marketing_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "primary_key",
+      "detail": "4384 unique keys",
+      "source": "marketing_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "freshness",
+      "detail": "latest=2026-08-20T09:00:00Z; lag_hours=3.00",
+      "source": "marketing_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "schema",
+      "detail": "7 expected columns present",
+      "source": "affiliates_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "values",
+      "detail": "3288 rows satisfy required, type, domain, and range rules",
+      "source": "affiliates_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "primary_key",
+      "detail": "3288 unique keys",
+      "source": "affiliates_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "freshness",
+      "detail": "latest=2026-08-20T09:00:00Z; lag_hours=3.00",
+      "source": "affiliates_daily",
+      "status": "PASS"
+    },
+    {
       "check": "foreign_key:order_id->orders",
       "detail": "all 2 keys resolve",
       "source": "refunds",
       "status": "PASS"
+    },
+    {
+      "check": "foreign_key:activity_date->revenue_daily",
+      "detail": "all 4384 keys resolve",
+      "source": "marketing_daily",
+      "status": "PASS"
+    },
+    {
+      "check": "foreign_key:activity_date->revenue_daily",
+      "detail": "all 3288 keys resolve",
+      "source": "affiliates_daily",
+      "status": "PASS"
     }
   ],
-  "contract_version": "1.0.0",
+  "contract_version": "2.0.0",
   "failed_check_count": 0,
   "fixture_as_of": "2026-08-20T12:00:00Z",
   "status": "PASS"

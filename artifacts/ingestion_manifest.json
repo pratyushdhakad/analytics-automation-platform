@@ -1,10 +1,10 @@
 {
-  "contract_version": "1.0.0",
+  "contract_version": "2.0.0",
   "fixture_as_of": "2026-08-20T12:00:00Z",
   "publish_gate": "PASS",
-  "run_id": "fixture-20260820-0a97b13da0",
+  "run_id": "fixture-20260820-165128cf2e",
   "run_type": "deterministic_fixture",
-  "source_count": 3,
+  "source_count": 6,
   "sources": [
     {
       "latest_record_at": "2026-08-20T08:05:00Z",
@@ -36,7 +36,39 @@
       ],
       "row_count": 9,
       "sha256": "df62ba76ed181c1a4d336be9c27c10af205744ce40f68735d3a01cd889d1c50b"
+    },
+    {
+      "latest_record_at": "2026-08-20T09:00:00Z",
+      "name": "revenue_daily",
+      "path": "data/source/revenue_daily.csv",
+      "primary_key": [
+        "activity_date"
+      ],
+      "row_count": 1096,
+      "sha256": "953e3035f2386cce5ae922a2730bac7fc583c3b86b50f0fdc0209bedbaf5e6c7"
+    },
+    {
+      "latest_record_at": "2026-08-20T09:00:00Z",
+      "name": "marketing_daily",
+      "path": "data/source/marketing_daily.csv",
+      "primary_key": [
+        "activity_date",
+        "channel"
+      ],
+      "row_count": 4384,
+      "sha256": "da15ae89442dee064c3932f96af0deb93ca5215d51845a1448db86111c9911f9"
+    },
+    {
+      "latest_record_at": "2026-08-20T09:00:00Z",
+      "name": "affiliates_daily",
+      "path": "data/source/affiliates_daily.csv",
+      "primary_key": [
+        "activity_date",
+        "partner"
+      ],
+      "row_count": 3288,
+      "sha256": "274ae317e6f4f5bc49a2af885706b59f6cee68f7df4f934ae870e01e7193026c"
     }
   ],
-  "total_rows": 23
+  "total_rows": 8791
 }

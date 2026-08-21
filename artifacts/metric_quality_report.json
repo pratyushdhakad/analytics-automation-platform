@@ -1,0 +1,36 @@
+{
+  "check_count": 6,
+  "checks": [
+    {
+      "check": "continuous_daily_grain",
+      "detail": "1096 unique daily rows across 1096 expected days",
+      "status": "PASS"
+    },
+    {
+      "check": "gross_less_refunds_equals_net",
+      "detail": "1096 of 1096 rows pass",
+      "status": "PASS"
+    },
+    {
+      "check": "channel_spend_equals_total",
+      "detail": "1096 of 1096 rows pass",
+      "status": "PASS"
+    },
+    {
+      "check": "affiliate_revenue_is_subset_of_gross",
+      "detail": "1096 of 1096 rows pass",
+      "status": "PASS"
+    },
+    {
+      "check": "shipment_gap_reconciles",
+      "detail": "1096 of 1096 rows pass",
+      "status": "PASS"
+    },
+    {
+      "check": "nonnegative_operating_metrics",
+      "detail": "1096 of 1096 rows pass",
+      "status": "PASS"
+    }
+  ],
+  "status": "PASS"
+}

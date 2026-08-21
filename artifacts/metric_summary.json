@@ -1,0 +1,16 @@
+{
+  "day_count": 1096,
+  "end_date": "2026-08-20",
+  "latest_28_days": {
+    "affiliate_revenue_usd": 48145.27,
+    "ending_backlog_revenue_usd": 0.0,
+    "gross_revenue_usd": 235882.99,
+    "marketing_spend_usd": 34126.22,
+    "net_revenue_usd": 227263.98,
+    "shipped_revenue_usd": 227263.99
+  },
+  "metric_contract_version": "1.0.0",
+  "quality_check_count": 6,
+  "reconciliation_status": "PASS",
+  "start_date": "2023-08-21"
+}
