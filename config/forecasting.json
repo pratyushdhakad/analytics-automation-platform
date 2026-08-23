@@ -1,0 +1,17 @@
+{
+  "forecast_version": "1.0.0",
+  "targets": ["net_revenue_usd", "shipped_revenue_usd"],
+  "models": ["seasonal_naive", "driver_regression"],
+  "season_length_days": 364,
+  "future_horizon_days": 91,
+  "evaluation_horizons_days": [28, 56, 91],
+  "prediction_interval": 0.9,
+  "ridge_lambda": 8.0,
+  "backtest": {
+    "origin_count": 6,
+    "step_days": 28,
+    "minimum_training_days": 730,
+    "driver_mode": "observed_as_planned"
+  }
+}
+
