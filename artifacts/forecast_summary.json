@@ -1,0 +1,64 @@
+{
+  "as_of_date": "2026-08-20",
+  "champions": {
+    "net_revenue_usd": "driver_regression",
+    "shipped_revenue_usd": "seasonal_naive"
+  },
+  "driver_plan_method": "52_week_pattern_with_recent_pacing",
+  "forecast_end_date": "2026-11-19",
+  "forecast_start_date": "2026-08-21",
+  "forecast_version": "1.0.0",
+  "horizon_days": 91,
+  "horizons": {
+    "28_days": {
+      "net_revenue_usd": {
+        "change_vs_prior_period_pct": 9.55,
+        "daily_lower_bound_sum_usd": 241339.61,
+        "daily_upper_bound_sum_usd": 256586.27,
+        "point_forecast_usd": 248962.95,
+        "prior_period_actual_usd": 227263.98
+      },
+      "shipped_revenue_usd": {
+        "change_vs_prior_period_pct": 0.59,
+        "daily_lower_bound_sum_usd": 196096.49,
+        "daily_upper_bound_sum_usd": 261134.91,
+        "point_forecast_usd": 228615.7,
+        "prior_period_actual_usd": 227263.99
+      }
+    },
+    "56_days": {
+      "net_revenue_usd": {
+        "change_vs_prior_period_pct": 17.6,
+        "daily_lower_bound_sum_usd": 503990.45,
+        "daily_upper_bound_sum_usd": 535253.4,
+        "point_forecast_usd": 519621.93,
+        "prior_period_actual_usd": 441861.69
+      },
+      "shipped_revenue_usd": {
+        "change_vs_prior_period_pct": 8.05,
+        "daily_lower_bound_sum_usd": 410747.38,
+        "daily_upper_bound_sum_usd": 544107.14,
+        "point_forecast_usd": 477427.26,
+        "prior_period_actual_usd": 441861.7
+      }
+    },
+    "91_days": {
+      "net_revenue_usd": {
+        "change_vs_prior_period_pct": 27.72,
+        "daily_lower_bound_sum_usd": 851722.86,
+        "daily_upper_bound_sum_usd": 904035.02,
+        "point_forecast_usd": 877878.96,
+        "prior_period_actual_usd": 687366.58
+      },
+      "shipped_revenue_usd": {
+        "change_vs_prior_period_pct": 17.03,
+        "daily_lower_bound_sum_usd": 692840.7,
+        "daily_upper_bound_sum_usd": 915991.0,
+        "point_forecast_usd": 804415.85,
+        "prior_period_actual_usd": 687366.58
+      }
+    }
+  },
+  "interval_note": "Totals sum daily marginal bounds and are not joint period intervals.",
+  "prediction_interval": 0.9
+}

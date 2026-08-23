@@ -1,0 +1,142 @@
+{
+  "champions": {
+    "net_revenue_usd": "driver_regression",
+    "shipped_revenue_usd": "seasonal_naive"
+  },
+  "driver_backtest_mode": "observed_as_planned",
+  "evaluation_method": "rolling_origin",
+  "forecast_version": "1.0.0",
+  "horizon_days": 91,
+  "metrics": {
+    "net_revenue_usd": {
+      "driver_regression": {
+        "28_days": {
+          "bias_pct": 0.46,
+          "interval_coverage_pct": 89.29,
+          "mae": 138.75,
+          "mase": 0.166,
+          "observation_count": 168,
+          "rmse": 173.81,
+          "wape_pct": 1.77
+        },
+        "56_days": {
+          "bias_pct": 0.57,
+          "interval_coverage_pct": 91.67,
+          "mae": 133.87,
+          "mase": 0.161,
+          "observation_count": 336,
+          "rmse": 168.15,
+          "wape_pct": 1.73
+        },
+        "91_days": {
+          "bias_pct": 0.67,
+          "interval_coverage_pct": 93.41,
+          "mae": 128.38,
+          "mase": 0.154,
+          "observation_count": 546,
+          "rmse": 162.42,
+          "wape_pct": 1.68
+        }
+      },
+      "seasonal_naive": {
+        "28_days": {
+          "bias_pct": -9.41,
+          "interval_coverage_pct": 95.24,
+          "mae": 751.07,
+          "mase": 0.901,
+          "observation_count": 168,
+          "rmse": 811.01,
+          "wape_pct": 9.56
+        },
+        "56_days": {
+          "bias_pct": -9.32,
+          "interval_coverage_pct": 95.83,
+          "mae": 738.59,
+          "mase": 0.886,
+          "observation_count": 336,
+          "rmse": 796.18,
+          "wape_pct": 9.56
+        },
+        "91_days": {
+          "bias_pct": -9.24,
+          "interval_coverage_pct": 96.52,
+          "mae": 723.09,
+          "mase": 0.867,
+          "observation_count": 546,
+          "rmse": 778.77,
+          "wape_pct": 9.48
+        }
+      }
+    },
+    "shipped_revenue_usd": {
+      "driver_regression": {
+        "28_days": {
+          "bias_pct": 0.73,
+          "interval_coverage_pct": 77.98,
+          "mae": 1142.86,
+          "mase": 1.436,
+          "observation_count": 168,
+          "rmse": 1364.91,
+          "wape_pct": 13.7
+        },
+        "56_days": {
+          "bias_pct": 1.02,
+          "interval_coverage_pct": 82.14,
+          "mae": 1077.4,
+          "mase": 1.354,
+          "observation_count": 336,
+          "rmse": 1311.46,
+          "wape_pct": 13.27
+        },
+        "91_days": {
+          "bias_pct": 1.87,
+          "interval_coverage_pct": 87.91,
+          "mae": 968.19,
+          "mase": 1.217,
+          "observation_count": 546,
+          "rmse": 1193.66,
+          "wape_pct": 12.3
+        }
+      },
+      "seasonal_naive": {
+        "28_days": {
+          "bias_pct": -9.5,
+          "interval_coverage_pct": 92.86,
+          "mae": 799.1,
+          "mase": 1.004,
+          "observation_count": 168,
+          "rmse": 879.99,
+          "wape_pct": 9.58
+        },
+        "56_days": {
+          "bias_pct": -9.46,
+          "interval_coverage_pct": 93.15,
+          "mae": 782.26,
+          "mase": 0.983,
+          "observation_count": 336,
+          "rmse": 865.13,
+          "wape_pct": 9.64
+        },
+        "91_days": {
+          "bias_pct": -9.4,
+          "interval_coverage_pct": 93.22,
+          "mae": 755.56,
+          "mase": 0.95,
+          "observation_count": 546,
+          "rmse": 838.74,
+          "wape_pct": 9.6
+        }
+      }
+    }
+  },
+  "origin_count": 6,
+  "origin_dates": [
+    "2026-01-01",
+    "2026-01-29",
+    "2026-02-26",
+    "2026-03-26",
+    "2026-04-23",
+    "2026-05-21"
+  ],
+  "prediction_interval": 0.9
+}
