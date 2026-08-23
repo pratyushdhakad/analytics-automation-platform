@@ -43,7 +43,7 @@ def _days() -> Iterable[date]:
         yield START_DATE + timedelta(days=offset)
 
 
-def _event(day: date) -> tuple[str, float]:
+def commercial_event(day: date) -> tuple[str, float]:
     if day.month == 11 and day.day >= 20:
         return "holiday_peak", 1.34
     if day.month == 12 and day.day <= 18:
@@ -67,7 +67,7 @@ def generate_history(root: Path) -> dict[str, object]:
     affiliate_revenue_by_day: dict[date, float] = {}
 
     for index, day in enumerate(days):
-        event_name, event_lift = _event(day)
+        event_name, event_lift = commercial_event(day)
         annual = 1.0 + 0.18 * math.cos(2 * math.pi * (day.timetuple().tm_yday - 330) / 365.25)
         trend = 1.0 + 0.00032 * index
         total_spend = 0.0
@@ -119,7 +119,7 @@ def generate_history(root: Path) -> dict[str, object]:
     prior_gross: list[float] = []
     weekday_factors = [0.84, 0.91, 0.98, 1.02, 1.12, 1.17, 0.96]
     for index, day in enumerate(days):
-        event_name, event_lift = _event(day)
+        event_name, event_lift = commercial_event(day)
         annual = 1.0 + 0.18 * math.cos(2 * math.pi * (day.timetuple().tm_yday - 330) / 365.25)
         trend = 1.0 + 0.00032 * index
         baseline = 3850.0 * annual * trend * weekday_factors[day.weekday()] * event_lift

@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from .forecast_pipeline import run_forecast_pipeline
 from .history import generate_history
 from .ingestion import run_ingestion
 from .metrics import build_daily_metrics
@@ -12,6 +13,7 @@ def main() -> None:
     history = generate_history(root)
     manifest = run_ingestion(root)
     metric_summary = build_daily_metrics(root)
+    forecast_summary = run_forecast_pipeline(root)
     print(
         "Revenue data gate {gate}: {sources} sources, {rows} rows, "
         "{days} forecast-ready days, run {run_id}".format(
@@ -27,6 +29,11 @@ def main() -> None:
             status=metric_summary["reconciliation_status"],
             checks=metric_summary["quality_check_count"],
             revenue=metric_summary["latest_28_days"]["net_revenue_usd"],
+        )
+    )
+    print(
+        "Forecast through {forecast_end_date}: champions={champions}".format(
+            **forecast_summary
         )
     )
 
