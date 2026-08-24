@@ -1,0 +1,104 @@
+{
+  "scenario_version": "1.0.0",
+  "base_scenario": "base_plan",
+  "scenarios": [
+    {
+      "scenario_id": "base_plan",
+      "label": "Base plan",
+      "description": "Current 52-week driver pattern with recent pacing.",
+      "channel_spend_multipliers": {
+        "paid_search": 1.0,
+        "paid_social": 1.0,
+        "retargeting": 1.0,
+        "email": 1.0
+      },
+      "affiliate_multiplier": 1.0,
+      "promotion_multiplier": 1.0,
+      "fulfillment_capacity_multiplier": 1.0
+    },
+    {
+      "scenario_id": "downside",
+      "label": "Downside",
+      "description": "Broad demand pressure and tighter fulfillment capacity.",
+      "channel_spend_multipliers": {
+        "paid_search": 0.9,
+        "paid_social": 0.88,
+        "retargeting": 0.92,
+        "email": 0.95
+      },
+      "affiliate_multiplier": 0.85,
+      "promotion_multiplier": 0.9,
+      "fulfillment_capacity_multiplier": 0.95
+    },
+    {
+      "scenario_id": "upside",
+      "label": "Upside",
+      "description": "Coordinated channel, affiliate, promotion, and capacity expansion.",
+      "channel_spend_multipliers": {
+        "paid_search": 1.12,
+        "paid_social": 1.15,
+        "retargeting": 1.08,
+        "email": 1.05
+      },
+      "affiliate_multiplier": 1.15,
+      "promotion_multiplier": 1.15,
+      "fulfillment_capacity_multiplier": 1.12
+    },
+    {
+      "scenario_id": "marketing_acceleration",
+      "label": "Marketing acceleration",
+      "description": "Increase paid media while other commercial assumptions remain fixed.",
+      "channel_spend_multipliers": {
+        "paid_search": 1.15,
+        "paid_social": 1.2,
+        "retargeting": 1.1,
+        "email": 1.05
+      },
+      "affiliate_multiplier": 1.0,
+      "promotion_multiplier": 1.0,
+      "fulfillment_capacity_multiplier": 1.0
+    },
+    {
+      "scenario_id": "affiliate_expansion",
+      "label": "Affiliate expansion",
+      "description": "Increase affiliate contribution while other assumptions remain fixed.",
+      "channel_spend_multipliers": {
+        "paid_search": 1.0,
+        "paid_social": 1.0,
+        "retargeting": 1.0,
+        "email": 1.0
+      },
+      "affiliate_multiplier": 1.25,
+      "promotion_multiplier": 1.0,
+      "fulfillment_capacity_multiplier": 1.0
+    },
+    {
+      "scenario_id": "promotion_push",
+      "label": "Promotion push",
+      "description": "Increase modeled event intensity on scheduled promotion days only.",
+      "channel_spend_multipliers": {
+        "paid_search": 1.0,
+        "paid_social": 1.0,
+        "retargeting": 1.0,
+        "email": 1.0
+      },
+      "affiliate_multiplier": 1.0,
+      "promotion_multiplier": 1.25,
+      "fulfillment_capacity_multiplier": 1.0
+    },
+    {
+      "scenario_id": "capacity_relief",
+      "label": "Capacity relief",
+      "description": "Release more booked demand through additional fulfillment capacity.",
+      "channel_spend_multipliers": {
+        "paid_search": 1.0,
+        "paid_social": 1.0,
+        "retargeting": 1.0,
+        "email": 1.0
+      },
+      "affiliate_multiplier": 1.0,
+      "promotion_multiplier": 1.0,
+      "fulfillment_capacity_multiplier": 1.25
+    }
+  ]
+}
