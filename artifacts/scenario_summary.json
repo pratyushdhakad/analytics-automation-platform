@@ -1,0 +1,323 @@
+{
+  "base_91_day_net_revenue_usd": 877862.39,
+  "base_scenario": "base_plan",
+  "horizon_days": [
+    28,
+    56,
+    91
+  ],
+  "interpretation": "Conditional planning scenarios, not causal lift or ROAS estimates.",
+  "method": "champion_baseline_plus_driver_delta",
+  "scenario_count": 7,
+  "scenario_version": "1.0.0",
+  "scenarios": {
+    "affiliate_expansion": {
+      "assumptions": {
+        "affiliate_multiplier": 1.25,
+        "channel_spend_multipliers": {
+          "email": 1.0,
+          "paid_search": 1.0,
+          "paid_social": 1.0,
+          "retargeting": 1.0
+        },
+        "fulfillment_capacity_multiplier": 1.0,
+        "promotion_multiplier": 1.0
+      },
+      "description": "Increase affiliate contribution while other assumptions remain fixed.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 65552.92,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 37578.37,
+          "net_revenue_delta_vs_base_usd": 12467.73,
+          "net_revenue_usd": 261431.14,
+          "shipped_revenue_delta_vs_base_usd": 11416.63,
+          "shipped_revenue_usd": 240032.33
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 137338.77,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 78713.4,
+          "net_revenue_delta_vs_base_usd": 26120.88,
+          "net_revenue_usd": 545735.13,
+          "shipped_revenue_delta_vs_base_usd": 23918.79,
+          "shipped_revenue_usd": 501346.05
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 232051.32,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 133299.41,
+          "net_revenue_delta_vs_base_usd": 44134.61,
+          "net_revenue_usd": 921997.0,
+          "shipped_revenue_delta_vs_base_usd": 40413.85,
+          "shipped_revenue_usd": 844829.7
+        }
+      },
+      "label": "Affiliate expansion"
+    },
+    "base_plan": {
+      "assumptions": {
+        "affiliate_multiplier": 1.0,
+        "channel_spend_multipliers": {
+          "email": 1.0,
+          "paid_search": 1.0,
+          "paid_social": 1.0,
+          "retargeting": 1.0
+        },
+        "fulfillment_capacity_multiplier": 1.0,
+        "promotion_multiplier": 1.0
+      },
+      "description": "Current 52-week driver pattern with recent pacing.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 52442.33,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 37578.37,
+          "net_revenue_delta_vs_base_usd": 0.0,
+          "net_revenue_usd": 248963.41,
+          "shipped_revenue_delta_vs_base_usd": 0.0,
+          "shipped_revenue_usd": 228615.7
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 109871.01,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 78713.4,
+          "net_revenue_delta_vs_base_usd": 0.0,
+          "net_revenue_usd": 519614.25,
+          "shipped_revenue_delta_vs_base_usd": 0.0,
+          "shipped_revenue_usd": 477427.26
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 185641.02,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 133299.41,
+          "net_revenue_delta_vs_base_usd": 0.0,
+          "net_revenue_usd": 877862.39,
+          "shipped_revenue_delta_vs_base_usd": 0.0,
+          "shipped_revenue_usd": 804415.85
+        }
+      },
+      "label": "Base plan"
+    },
+    "capacity_relief": {
+      "assumptions": {
+        "affiliate_multiplier": 1.0,
+        "channel_spend_multipliers": {
+          "email": 1.0,
+          "paid_search": 1.0,
+          "paid_social": 1.0,
+          "retargeting": 1.0
+        },
+        "fulfillment_capacity_multiplier": 1.25,
+        "promotion_multiplier": 1.0
+      },
+      "description": "Release more booked demand through additional fulfillment capacity.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 52442.33,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 37578.37,
+          "net_revenue_delta_vs_base_usd": 0.0,
+          "net_revenue_usd": 248963.41,
+          "shipped_revenue_delta_vs_base_usd": 9610.07,
+          "shipped_revenue_usd": 238225.77
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 109871.01,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 78713.4,
+          "net_revenue_delta_vs_base_usd": 0.0,
+          "net_revenue_usd": 519614.25,
+          "shipped_revenue_delta_vs_base_usd": 20321.95,
+          "shipped_revenue_usd": 497749.21
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 185641.02,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 133299.41,
+          "net_revenue_delta_vs_base_usd": 0.0,
+          "net_revenue_usd": 877862.39,
+          "shipped_revenue_delta_vs_base_usd": 35824.27,
+          "shipped_revenue_usd": 840240.12
+        }
+      },
+      "label": "Capacity relief"
+    },
+    "downside": {
+      "assumptions": {
+        "affiliate_multiplier": 0.85,
+        "channel_spend_multipliers": {
+          "email": 0.95,
+          "paid_search": 0.9,
+          "paid_social": 0.88,
+          "retargeting": 0.92
+        },
+        "fulfillment_capacity_multiplier": 0.95,
+        "promotion_multiplier": 0.9
+      },
+      "description": "Broad demand pressure and tighter fulfillment capacity.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 44575.98,
+          "marketing_spend_delta_vs_base_usd": -3814.95,
+          "marketing_spend_usd": 33763.42,
+          "net_revenue_delta_vs_base_usd": -19690.25,
+          "net_revenue_usd": 229273.16,
+          "shipped_revenue_delta_vs_base_usd": -24015.15,
+          "shipped_revenue_usd": 204600.55
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 93390.38,
+          "marketing_spend_delta_vs_base_usd": -7986.62,
+          "marketing_spend_usd": 70726.78,
+          "net_revenue_delta_vs_base_usd": -41225.95,
+          "net_revenue_usd": 478388.3,
+          "shipped_revenue_delta_vs_base_usd": -50154.86,
+          "shipped_revenue_usd": 427272.4
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 157794.88,
+          "marketing_spend_delta_vs_base_usd": -13518.8,
+          "marketing_spend_usd": 119780.61,
+          "net_revenue_delta_vs_base_usd": -69737.66,
+          "net_revenue_usd": 808124.73,
+          "shipped_revenue_delta_vs_base_usd": -84699.03,
+          "shipped_revenue_usd": 719716.82
+        }
+      },
+      "label": "Downside"
+    },
+    "marketing_acceleration": {
+      "assumptions": {
+        "affiliate_multiplier": 1.0,
+        "channel_spend_multipliers": {
+          "email": 1.05,
+          "paid_search": 1.15,
+          "paid_social": 1.2,
+          "retargeting": 1.1
+        },
+        "fulfillment_capacity_multiplier": 1.0,
+        "promotion_multiplier": 1.0
+      },
+      "description": "Increase paid media while other commercial assumptions remain fixed.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 52442.33,
+          "marketing_spend_delta_vs_base_usd": 5820.36,
+          "marketing_spend_usd": 43398.73,
+          "net_revenue_delta_vs_base_usd": 18601.28,
+          "net_revenue_usd": 267564.69,
+          "shipped_revenue_delta_vs_base_usd": 9487.58,
+          "shipped_revenue_usd": 238103.28
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 109871.01,
+          "marketing_spend_delta_vs_base_usd": 12180.48,
+          "marketing_spend_usd": 90893.88,
+          "net_revenue_delta_vs_base_usd": 38927.56,
+          "net_revenue_usd": 558541.81,
+          "shipped_revenue_delta_vs_base_usd": 19855.0,
+          "shipped_revenue_usd": 497282.26
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 185641.02,
+          "marketing_spend_delta_vs_base_usd": 20612.29,
+          "marketing_spend_usd": 153911.7,
+          "net_revenue_delta_vs_base_usd": 65874.77,
+          "net_revenue_usd": 943737.16,
+          "shipped_revenue_delta_vs_base_usd": 33599.41,
+          "shipped_revenue_usd": 838015.26
+        }
+      },
+      "label": "Marketing acceleration"
+    },
+    "promotion_push": {
+      "assumptions": {
+        "affiliate_multiplier": 1.0,
+        "channel_spend_multipliers": {
+          "email": 1.0,
+          "paid_search": 1.0,
+          "paid_social": 1.0,
+          "retargeting": 1.0
+        },
+        "fulfillment_capacity_multiplier": 1.0,
+        "promotion_multiplier": 1.25
+      },
+      "description": "Increase modeled event intensity on scheduled promotion days only.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 52442.33,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 37578.37,
+          "net_revenue_delta_vs_base_usd": 43.59,
+          "net_revenue_usd": 249007.0,
+          "shipped_revenue_delta_vs_base_usd": 445.29,
+          "shipped_revenue_usd": 229060.99
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 109871.01,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 78713.4,
+          "net_revenue_delta_vs_base_usd": 72.65,
+          "net_revenue_usd": 519686.9,
+          "shipped_revenue_delta_vs_base_usd": 742.15,
+          "shipped_revenue_usd": 478169.41
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 185641.02,
+          "marketing_spend_delta_vs_base_usd": 0.0,
+          "marketing_spend_usd": 133299.41,
+          "net_revenue_delta_vs_base_usd": 130.77,
+          "net_revenue_usd": 877993.16,
+          "shipped_revenue_delta_vs_base_usd": 1335.87,
+          "shipped_revenue_usd": 805751.72
+        }
+      },
+      "label": "Promotion push"
+    },
+    "upside": {
+      "assumptions": {
+        "affiliate_multiplier": 1.15,
+        "channel_spend_multipliers": {
+          "email": 1.05,
+          "paid_search": 1.12,
+          "paid_social": 1.15,
+          "retargeting": 1.08
+        },
+        "fulfillment_capacity_multiplier": 1.12,
+        "promotion_multiplier": 1.15
+      },
+      "description": "Coordinated channel, affiliate, promotion, and capacity expansion.",
+      "horizons": {
+        "28_days": {
+          "affiliate_revenue_usd": 60308.68,
+          "marketing_spend_delta_vs_base_usd": 4542.36,
+          "marketing_spend_usd": 42120.73,
+          "net_revenue_delta_vs_base_usd": 22023.69,
+          "net_revenue_usd": 270987.1,
+          "shipped_revenue_delta_vs_base_usd": 19818.36,
+          "shipped_revenue_usd": 248434.06
+        },
+        "56_days": {
+          "affiliate_revenue_usd": 126351.65,
+          "marketing_spend_delta_vs_base_usd": 9508.92,
+          "marketing_spend_usd": 88222.32,
+          "net_revenue_delta_vs_base_usd": 46105.64,
+          "net_revenue_usd": 565719.89,
+          "shipped_revenue_delta_vs_base_usd": 41407.45,
+          "shipped_revenue_usd": 518834.71
+        },
+        "91_days": {
+          "affiliate_revenue_usd": 213487.16,
+          "marketing_spend_delta_vs_base_usd": 16093.58,
+          "marketing_spend_usd": 149392.99,
+          "net_revenue_delta_vs_base_usd": 77992.61,
+          "net_revenue_usd": 955855.0,
+          "shipped_revenue_delta_vs_base_usd": 70684.05,
+          "shipped_revenue_usd": 875099.9
+        }
+      },
+      "label": "Upside"
+    }
+  }
+}

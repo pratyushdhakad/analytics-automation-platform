@@ -1,0 +1,8 @@
+scenario_id,scenario_label,net_revenue_usd,net_revenue_delta_vs_base_usd,shipped_revenue_usd,shipped_revenue_delta_vs_base_usd,marketing_spend_usd,marketing_spend_delta_vs_base_usd,planning_revenue_per_incremental_spend
+upside,Upside,955855.0,77992.61,875099.9,70684.05,149392.99,16093.58,4.846
+marketing_acceleration,Marketing acceleration,943737.16,65874.77,838015.26,33599.41,153911.7,20612.29,3.196
+affiliate_expansion,Affiliate expansion,921997.0,44134.61,844829.7,40413.85,133299.41,0.0,
+promotion_push,Promotion push,877993.16,130.77,805751.72,1335.87,133299.41,0.0,
+base_plan,Base plan,877862.39,0.0,804415.85,0.0,133299.41,0.0,
+capacity_relief,Capacity relief,877862.39,0.0,840240.12,35824.27,133299.41,0.0,
+downside,Downside,808124.73,-69737.66,719716.82,-84699.03,119780.61,-13518.8,
