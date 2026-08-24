@@ -13,9 +13,9 @@
     "28_days": {
       "net_revenue_usd": {
         "change_vs_prior_period_pct": 9.55,
-        "daily_lower_bound_sum_usd": 241339.61,
-        "daily_upper_bound_sum_usd": 256586.27,
-        "point_forecast_usd": 248962.95,
+        "daily_lower_bound_sum_usd": 241340.04,
+        "daily_upper_bound_sum_usd": 256586.75,
+        "point_forecast_usd": 248963.41,
         "prior_period_actual_usd": 227263.98
       },
       "shipped_revenue_usd": {
@@ -29,9 +29,9 @@
     "56_days": {
       "net_revenue_usd": {
         "change_vs_prior_period_pct": 17.6,
-        "daily_lower_bound_sum_usd": 503990.45,
-        "daily_upper_bound_sum_usd": 535253.4,
-        "point_forecast_usd": 519621.93,
+        "daily_lower_bound_sum_usd": 503982.69,
+        "daily_upper_bound_sum_usd": 535245.71,
+        "point_forecast_usd": 519614.25,
         "prior_period_actual_usd": 441861.69
       },
       "shipped_revenue_usd": {
@@ -44,10 +44,10 @@
     },
     "91_days": {
       "net_revenue_usd": {
-        "change_vs_prior_period_pct": 27.72,
-        "daily_lower_bound_sum_usd": 851722.86,
-        "daily_upper_bound_sum_usd": 904035.02,
-        "point_forecast_usd": 877878.96,
+        "change_vs_prior_period_pct": 27.71,
+        "daily_lower_bound_sum_usd": 851706.21,
+        "daily_upper_bound_sum_usd": 904018.43,
+        "point_forecast_usd": 877862.39,
         "prior_period_actual_usd": 687366.58
       },
       "shipped_revenue_usd": {
