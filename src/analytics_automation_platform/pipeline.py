@@ -6,6 +6,7 @@ from .forecast_pipeline import run_forecast_pipeline
 from .history import generate_history
 from .ingestion import run_ingestion
 from .metrics import build_daily_metrics
+from .scenario_pipeline import run_scenario_pipeline
 
 
 def main() -> None:
@@ -14,6 +15,7 @@ def main() -> None:
     manifest = run_ingestion(root)
     metric_summary = build_daily_metrics(root)
     forecast_summary = run_forecast_pipeline(root)
+    scenario_summary = run_scenario_pipeline(root)
     print(
         "Revenue data gate {gate}: {sources} sources, {rows} rows, "
         "{days} forecast-ready days, run {run_id}".format(
@@ -35,6 +37,10 @@ def main() -> None:
         "Forecast through {forecast_end_date}: champions={champions}".format(
             **forecast_summary
         )
+    )
+    print(
+        f"Scenario analysis: {scenario_summary['scenario_count']} plans across "
+        f"{scenario_summary['horizon_days'][-1]} days"
     )
 
 

@@ -15,6 +15,12 @@ DRIVER_COLUMNS = (
     "affiliate_revenue_usd",
     "stockout_rate",
 )
+CHANNEL_COLUMNS = (
+    "paid_search_spend_usd",
+    "paid_social_spend_usd",
+    "retargeting_spend_usd",
+    "email_spend_usd",
+)
 EVENT_NAMES = ("monthly_promotion", "summer_event", "holiday_peak")
 SCALED_FEATURE_INDEXES = (1, 10, 11, 12)
 
@@ -123,7 +129,7 @@ def build_future_driver_plan(history: list[dict[str, str]], horizon_days: int) -
     last_date = date.fromisoformat(history[-1]["activity_date"])
     by_date = {row["activity_date"]: row for row in history}
     growth: dict[str, float] = {}
-    for column in ("total_marketing_spend_usd", "affiliate_revenue_usd"):
+    for column in (*CHANNEL_COLUMNS, "affiliate_revenue_usd"):
         recent = sum(float(row[column]) for row in history[-28:])
         prior = sum(float(row[column]) for row in history[-392:-364])
         ratio = recent / prior if prior else 1.0
@@ -135,10 +141,18 @@ def build_future_driver_plan(history: list[dict[str, str]], horizon_days: int) -
         reference_date = forecast_date - timedelta(days=364)
         reference = by_date[reference_date.isoformat()]
         event_name, _ = commercial_event(forecast_date)
+        channels = {
+            column: float(reference[column]) * growth[column]
+            for column in CHANNEL_COLUMNS
+        }
+        formatted_channels = {
+            column: f"{value:.2f}" for column, value in channels.items()
+        }
         plan.append(
             {
                 "activity_date": forecast_date.isoformat(),
-                "total_marketing_spend_usd": f"{float(reference['total_marketing_spend_usd']) * growth['total_marketing_spend_usd']:.2f}",
+                "total_marketing_spend_usd": f"{sum(float(value) for value in formatted_channels.values()):.2f}",
+                **formatted_channels,
                 "affiliate_revenue_usd": f"{float(reference['affiliate_revenue_usd']) * growth['affiliate_revenue_usd']:.2f}",
                 "stockout_rate": reference["stockout_rate"],
                 "event_name": event_name,
@@ -196,4 +210,3 @@ def _quantile(values: list[float], probability: float) -> float:
         return ordered[lower]
     weight = position - lower
     return ordered[lower] * (1.0 - weight) + ordered[upper] * weight
-
