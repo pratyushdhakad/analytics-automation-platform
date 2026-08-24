@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+from .dashboard import build_dashboard_data
 from .forecast_pipeline import run_forecast_pipeline
 from .history import generate_history
 from .ingestion import run_ingestion
@@ -16,6 +17,7 @@ def main() -> None:
     metric_summary = build_daily_metrics(root)
     forecast_summary = run_forecast_pipeline(root)
     scenario_summary = run_scenario_pipeline(root)
+    dashboard_summary = build_dashboard_data(root)
     print(
         "Revenue data gate {gate}: {sources} sources, {rows} rows, "
         "{days} forecast-ready days, run {run_id}".format(
@@ -41,6 +43,10 @@ def main() -> None:
     print(
         f"Scenario analysis: {scenario_summary['scenario_count']} plans across "
         f"{scenario_summary['horizon_days'][-1]} days"
+    )
+    print(
+        f"Dashboard ready through {dashboard_summary['forecast_end_date']}: "
+        f"{len(dashboard_summary['scenarios'])} scenarios"
     )
 
 
