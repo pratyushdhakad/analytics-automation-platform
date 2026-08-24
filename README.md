@@ -10,7 +10,7 @@ What revenue should leadership expect over the next 4, 8, and 13 weeks—and how
 
 The decision owner is a revenue, marketing, or analytics leader who needs an explainable forecast and an auditable publish-or-hold decision before committing budget or operating capacity.
 
-## Day 3 build status
+## Day 4 build status
 
 The forecast-ready data foundation currently:
 
@@ -32,7 +32,11 @@ The forecast-ready data foundation currently:
 - reports WAPE, MASE, bias, RMSE, MAE, and 90% interval coverage;
 - selects a separate out-of-sample champion for net and shipped revenue;
 - publishes a 91-day conditional forecast with explicit driver assumptions; and
-- reproduces generated history, evaluation, and forecasts byte for byte with automated tests.
+- compares seven versioned growth and fulfillment scenarios;
+- retains channel-level paid search, paid social, retargeting, and email plans;
+- layers driver-model sensitivities onto the best-tested baseline for each target;
+- separates booked-demand changes from fulfillment-capacity effects;
+- reproduces generated history, evaluation, forecasts, and scenarios byte for byte with automated tests.
 
 ## Latest model decision
 
@@ -42,6 +46,19 @@ The forecast-ready data foundation currently:
 | Shipped revenue | Seasonal naive | 9.60% | -9.40% | 93.22% |
 
 The split decision is the point: complexity must earn promotion. Marketing, affiliate, calendar, and stockout signals improve net-revenue forecasting, but do not outperform the seasonal benchmark for shipment timing.
+
+## 13-week scenario decision
+
+| Scenario | Net revenue | Delta vs base | Shipped revenue | Shipment delta |
+|---|---:|---:|---:|---:|
+| Upside | $955,855 | +$77,993 | $875,100 | +$70,684 |
+| Marketing acceleration | $943,737 | +$65,875 | $838,015 | +$33,599 |
+| Affiliate expansion | $921,997 | +$44,135 | $844,830 | +$40,414 |
+| Base plan | $877,862 | — | $804,416 | — |
+| Capacity relief | $877,862 | $0 | $840,240 | +$35,824 |
+| Downside | $808,125 | -$69,738 | $719,717 | -$84,699 |
+
+These are conditional planning sensitivities, not causal lift or ROAS estimates. The champion forecast remains the baseline; scenarios add only the fitted driver-model delta. Capacity changes shipment realization without changing booked net revenue.
 
 ## Quick start
 
@@ -62,7 +79,10 @@ Generated outputs are written to `artifacts/`:
 - `forecast_evaluation.json` — 4-, 8-, and 13-week scorecards and champions;
 - `forecast_driver_plan.csv` — explicit future marketing, affiliate, event, and stockout assumptions;
 - `revenue_forecast.csv` — 91 daily forecasts per target with 90% intervals; and
-- `forecast_summary.json` — executive horizon totals and prior-period comparisons.
+- `forecast_summary.json` — executive horizon totals and prior-period comparisons;
+- `scenario_forecasts.csv` — 1,274 daily scenario-target forecasts;
+- `scenario_ranking.csv` — ranked 13-week plan comparison; and
+- `scenario_summary.json` — 4-, 8-, and 13-week scenario scorecards and assumptions.
 
 The project uses only the Python standard library, so the deterministic pipeline has no dependency installation step.
 
@@ -84,6 +104,8 @@ flowchart LR
     K --> M{Lowest 13-week WAPE by target}
     L --> M
     M --> N[Champion forecasts and intervals]
+    N --> O[Versioned growth scenarios]
+    O --> P[Net revenue and shipment comparison]
 ```
 
 ## Five-day roadmap
@@ -91,21 +113,21 @@ flowchart LR
 1. **Reliable ingestion:** deterministic fixtures, source registry, data contracts, quality gate — complete
 2. **Revenue data foundation:** three-year seasonal history, marketing and affiliate drivers, sales-to-shipment trends, governed metrics — complete
 3. **Forecasting engine:** seasonal baselines, external-regressor models, rolling-origin backtests, accuracy, bias, and prediction intervals — complete
-4. **Growth scenarios:** planned channel spend, affiliate, promotion, and fulfillment-capacity scenarios
+4. **Growth scenarios:** planned channel spend, affiliate, promotion, and fulfillment-capacity scenarios — complete
 5. **Decision experience:** executive forecast dashboard, CI, GitHub Pages, profile refresh, interview walkthrough
 
 ## Repository map
 
 ```text
-src/analytics_automation_platform/  history, contracts, ingestion, metrics, forecasting, evaluation, pipeline
-config/                             source, metric, and forecast contracts
+src/analytics_automation_platform/  history, contracts, ingestion, metrics, forecasting, evaluation, scenarios, pipeline
+config/                             source, metric, forecast, and scenario contracts
 data/source/                        deterministic revenue, marketing, affiliate, and Day 1 fixtures
 sql/                                BigQuery reference transformation
-tests/                              contract, signal, reconciliation, leakage, evaluation, lineage, and reproducibility tests
+tests/                              contract, signal, reconciliation, leakage, evaluation, scenario, lineage, and reproducibility tests
 artifacts/raw/                      validated source snapshots
 artifacts/marts/                    forecast-ready daily metric mart
 artifacts/                          quality, backtest, evaluation, forecast, and summary evidence
-docs/                               architecture, revenue-foundation, and forecasting decisions
+docs/                               architecture, revenue-foundation, forecasting, and scenario decisions
 ```
 
 ## AI-augmented build method
@@ -119,10 +141,12 @@ I use AI as an engineering multiplier for implementation, edge-case generation, 
 - Marketing efficiency and attributed orders are predictive planning signals, not causal incrementality or ROAS claims.
 - Driver-model backtests use realized drivers as a proxy for the plan available at each origin; production should retain point-in-time plan snapshots.
 - Prediction intervals are empirical and the summed daily bounds are not joint period intervals.
+- The forecast uses aggregate marketing spend; channel plans reconcile individually but do not claim channel-specific causal response curves.
+- Fulfillment scenarios use an explainable demand-gap heuristic rather than an inventory or warehouse network simulation.
 - Synthetic seasonality and driver relationships prove engineering behavior, not real-world forecast accuracy.
-- Day 3 forecasts are conditional on one explicit driver plan; adjustable scenarios arrive on Day 4.
+- Day 4 scenarios are deterministic plan sensitivities; a production workflow would add plan ownership, approvals, and observed-versus-plan variance.
 
-See [the revenue data foundation](docs/revenue-data-foundation.md) for signal design and governed definitions, and [forecasting and evaluation](docs/forecasting-and-evaluation.md) for leakage controls, scorecards, and modeling limitations.
+See [the revenue data foundation](docs/revenue-data-foundation.md) for signal design, [forecasting and evaluation](docs/forecasting-and-evaluation.md) for leakage controls and scorecards, and [growth scenario analysis](docs/scenario-analysis.md) for assumptions, scenario mechanics, and decision boundaries.
 
 ## License
 
