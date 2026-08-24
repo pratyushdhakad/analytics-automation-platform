@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Executive revenue forecast, model health, and growth scenario dashboard."
+    />
+    <title>Revenue Forecasting Control Tower</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to dashboard</a>
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="Control Tower home">
+        <span class="brand-mark">CT</span>
+        <span>Revenue Control Tower</span>
+      </a>
+      <nav aria-label="Dashboard sections">
+        <a href="#overview">Overview</a>
+        <a href="#scenarios">Scenarios</a>
+        <a href="#models">Model health</a>
+        <a href="#method">Method</a>
+      </nav>
+      <a
+        class="repo-link"
+        href="https://github.com/pratyushdhakad/analytics-automation-platform"
+      >View source ↗</a>
+    </header>
+
+    <main id="main-content">
+      <section class="hero" id="overview">
+        <div class="hero-copy">
+          <p class="eyebrow">Decision intelligence · 13-week outlook</p>
+          <h1>Revenue Forecasting<br /><span>Control Tower</span></h1>
+          <p class="hero-intro">
+            An auditable view of expected revenue, downside exposure, growth
+            levers, and shipment capacity—built from a tested forecasting pipeline.
+          </p>
+          <div class="status-line">
+            <span class="status-dot" aria-hidden="true"></span>
+            <span id="data-status">Loading validated forecast evidence…</span>
+          </div>
+        </div>
+        <aside class="decision-card" aria-labelledby="decision-heading">
+          <p class="eyebrow">Executive readout</p>
+          <h2 id="decision-heading">Decision brief</h2>
+          <p id="decision-brief">Loading scenario comparison…</p>
+          <dl class="decision-meta">
+            <div><dt>As of</dt><dd id="as-of">—</dd></div>
+            <div><dt>Forecast through</dt><dd id="forecast-through">—</dd></div>
+          </dl>
+        </aside>
+      </section>
+
+      <section class="control-strip" aria-label="Dashboard controls">
+        <div>
+          <span class="control-label">Decision window</span>
+          <div class="segmented" id="horizon-control">
+            <button data-horizon="28">4 weeks</button>
+            <button data-horizon="56">8 weeks</button>
+            <button class="active" data-horizon="91">13 weeks</button>
+          </div>
+        </div>
+        <div>
+          <span class="control-label">Revenue view</span>
+          <div class="segmented" id="target-control">
+            <button class="active" data-target="net_revenue_usd">Net revenue</button>
+            <button data-target="shipped_revenue_usd">Shipped revenue</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="kpi-grid" aria-label="Forecast key performance indicators">
+        <article class="kpi-card primary">
+          <p>Base forecast</p><strong id="kpi-base">—</strong>
+          <span id="kpi-base-note">Selected window</span>
+        </article>
+        <article class="kpi-card positive">
+          <p>Upside opportunity</p><strong id="kpi-upside">—</strong>
+          <span id="kpi-upside-total">—</span>
+        </article>
+        <article class="kpi-card negative">
+          <p>Downside exposure</p><strong id="kpi-downside">—</strong>
+          <span id="kpi-downside-total">—</span>
+        </article>
+        <article class="kpi-card">
+          <p>Scenario spread</p><strong id="kpi-spread">—</strong>
+          <span>Upside less downside</span>
+        </article>
+      </section>
+
+      <section class="panel chart-panel" id="scenarios">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Daily trajectory</p>
+            <h2>Forecast range over time</h2>
+          </div>
+          <div class="legend" aria-label="Chart legend">
+            <span><i class="legend-line base"></i>Base</span>
+            <span><i class="legend-line upside"></i>Upside</span>
+            <span><i class="legend-line downside"></i>Downside</span>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <svg id="forecast-chart" viewBox="0 0 920 330" role="img" aria-label="Daily forecast scenario line chart"></svg>
+        </div>
+      </section>
+
+      <section class="two-column">
+        <article class="panel scenario-panel">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Plan comparison</p>
+              <h2>Scenario ranking</h2>
+            </div>
+          </div>
+          <div id="scenario-bars" class="scenario-bars"></div>
+        </article>
+        <article class="panel" id="models">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Out-of-sample evidence</p>
+              <h2>Model health</h2>
+            </div>
+            <span class="health-badge">6 rolling origins</span>
+          </div>
+          <div id="model-health" class="model-health"></div>
+        </article>
+      </section>
+
+      <section class="panel table-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Decision ledger</p>
+            <h2>All operating plans</h2>
+          </div>
+          <p class="panel-note">Conditional planning sensitivities—not causal lift.</p>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>Scenario</th>
+                <th>Forecast</th>
+                <th>Delta vs base</th>
+                <th>Marketing spend</th>
+                <th>Capacity</th>
+              </tr>
+            </thead>
+            <tbody id="scenario-table"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="method" id="method">
+        <div>
+          <p class="eyebrow">How to read this</p>
+          <h2>Accuracy first. Complexity must earn promotion.</h2>
+        </div>
+        <p>
+          Each target keeps its best rolling-origin model. Scenario sensitivities
+          add only the fitted driver delta to that champion baseline. Marketing
+          and affiliate inputs are predictive planning signals, not causal ROAS.
+          Capacity changes shipment realization—not booked demand.
+        </p>
+        <div class="method-links">
+          <a href="https://github.com/pratyushdhakad/analytics-automation-platform/blob/main/docs/forecasting-and-evaluation.md">Forecast evaluation ↗</a>
+          <a href="https://github.com/pratyushdhakad/analytics-automation-platform/blob/main/docs/scenario-analysis.md">Scenario method ↗</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Built by Pratyush Dhakad · Synthetic portfolio data · Reproducible with <code>make run</code></p>
+    </footer>
+    <script src="app.js" defer></script>
+  </body>
+</html>
