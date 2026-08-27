@@ -1,0 +1,2 @@
+target,metric,severity,value,threshold,message
+shipped_revenue_usd,absolute_bias_pct,WATCH,8.44,8.0,"Shipped revenue is under-predicting actuals by 8.44%; review plan, backlog, and capacity assumptions before the next refresh."

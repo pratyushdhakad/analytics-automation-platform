@@ -1,0 +1,85 @@
+{
+  "alert_count": 1,
+  "alerts": [
+    {
+      "message": "Shipped revenue is under-predicting actuals by 8.44%; review plan, backlog, and capacity assumptions before the next refresh.",
+      "metric": "absolute_bias_pct",
+      "severity": "WATCH",
+      "target": "shipped_revenue_usd",
+      "threshold": 8.0,
+      "value": 8.44
+    }
+  ],
+  "method": "latest rolling-origin champion holdout",
+  "monitor_version": "1.0.0",
+  "observed_through": "2026-08-20",
+  "origin_date": "2026-05-21",
+  "overall_status": "WATCH",
+  "primary_window_days": 91,
+  "targets": {
+    "net_revenue_usd": {
+      "champion": "driver_regression",
+      "label": "Net revenue",
+      "status": "HEALTHY",
+      "windows": {
+        "28_days": {
+          "bias_pct": 1.13,
+          "interval_coverage_pct": 100.0,
+          "observation_count": 28,
+          "wape_pct": 1.67
+        },
+        "56_days": {
+          "bias_pct": 0.69,
+          "interval_coverage_pct": 98.21,
+          "observation_count": 56,
+          "wape_pct": 1.57
+        },
+        "91_days": {
+          "bias_pct": 0.67,
+          "interval_coverage_pct": 96.7,
+          "observation_count": 91,
+          "wape_pct": 1.53
+        }
+      }
+    },
+    "shipped_revenue_usd": {
+      "champion": "seasonal_naive",
+      "label": "Shipped revenue",
+      "status": "WATCH",
+      "windows": {
+        "28_days": {
+          "bias_pct": -8.99,
+          "interval_coverage_pct": 96.43,
+          "observation_count": 28,
+          "wape_pct": 8.99
+        },
+        "56_days": {
+          "bias_pct": -8.68,
+          "interval_coverage_pct": 96.43,
+          "observation_count": 56,
+          "wape_pct": 9.33
+        },
+        "91_days": {
+          "bias_pct": -8.44,
+          "interval_coverage_pct": 95.6,
+          "observation_count": 91,
+          "wape_pct": 8.83
+        }
+      }
+    }
+  },
+  "thresholds": {
+    "absolute_bias_pct": {
+      "critical": 12.0,
+      "watch": 8.0
+    },
+    "interval_coverage_pct": {
+      "critical_below": 75.0,
+      "watch_below": 85.0
+    },
+    "wape_pct": {
+      "critical": 15.0,
+      "watch": 10.0
+    }
+  }
+}
