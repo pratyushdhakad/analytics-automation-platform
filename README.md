@@ -12,7 +12,7 @@ What revenue should leadership expect over the next 4, 8, and 13 weeks—and how
 
 The decision owner is a revenue, marketing, or analytics leader who needs an explainable forecast and an auditable publish-or-hold decision before committing budget or operating capacity.
 
-## Day 5 build status
+## Build status
 
 The forecast-ready data foundation currently:
 
@@ -39,6 +39,9 @@ The forecast-ready data foundation currently:
 - layers driver-model sensitivities onto the best-tested baseline for each target;
 - separates booked-demand changes from fulfillment-capacity effects;
 - generates an interactive executive dashboard from the tested evidence contract;
+- monitors the latest out-of-sample champion forecasts across 4-, 8-, and 13-week windows;
+- evaluates forecast WAPE, signed bias, and interval coverage against versioned health thresholds;
+- publishes deterministic HEALTHY, WATCH, or CRITICAL alerts with an explicit operator response;
 - enforces tests, pipeline reproduction, artifact freshness, and JavaScript validation in CI;
 - deploys the static dashboard through GitHub Pages; and
 - reproduces generated history, evaluation, forecasts, scenarios, and dashboard data byte for byte.
@@ -51,6 +54,15 @@ The forecast-ready data foundation currently:
 | Shipped revenue | Seasonal naive | 9.60% | -9.40% | 93.22% |
 
 The split decision is the point: complexity must earn promotion. Marketing, affiliate, calendar, and stockout signals improve net-revenue forecasting, but do not outperform the seasonal benchmark for shipment timing.
+
+## Latest monitoring decision
+
+| Target | Status | 91-day WAPE | Bias | Interval coverage |
+|---|---|---:|---:|---:|
+| Net revenue | HEALTHY | 1.53% | +0.67% | 96.70% |
+| Shipped revenue | WATCH | 8.83% | -8.44% | 95.60% |
+
+The overall status is **WATCH** because the latest shipment holdout systematically under-predicts actuals. The generated alert routes an analyst to review plan, backlog, and capacity assumptions before the next refresh. This is a deterministic replay of out-of-sample evidence—not a claim of live production monitoring.
 
 ## 13-week scenario decision
 
@@ -91,6 +103,8 @@ Generated outputs are written to `artifacts/`:
 - `forecast_driver_plan.csv` — explicit future marketing, affiliate, event, and stockout assumptions;
 - `revenue_forecast.csv` — 91 daily forecasts per target with 90% intervals; and
 - `forecast_summary.json` — executive horizon totals and prior-period comparisons;
+- `forecast_monitoring.json` — latest-origin health status, thresholds, target scorecards, and alerts;
+- `forecast_alerts.csv` — operator-ready threshold breaches and response messages;
 - `scenario_forecasts.csv` — 1,274 daily scenario-target forecasts;
 - `scenario_ranking.csv` — ranked 13-week plan comparison; and
 - `scenario_summary.json` — 4-, 8-, and 13-week scenario scorecards and assumptions.
@@ -119,32 +133,36 @@ flowchart LR
     M --> N[Champion forecasts and intervals]
     N --> O[Versioned growth scenarios]
     O --> P[Net revenue and shipment comparison]
+    M --> S[Latest champion holdout]
+    S --> T[WAPE, bias, and coverage alerts]
     P --> Q[Executive dashboard]
+    T --> Q
     Q --> R[CI and GitHub Pages]
 ```
 
-## Five-day roadmap
+## Six-day build progression
 
 1. **Reliable ingestion:** deterministic fixtures, source registry, data contracts, quality gate — complete
 2. **Revenue data foundation:** three-year seasonal history, marketing and affiliate drivers, sales-to-shipment trends, governed metrics — complete
 3. **Forecasting engine:** seasonal baselines, external-regressor models, rolling-origin backtests, accuracy, bias, and prediction intervals — complete
 4. **Growth scenarios:** planned channel spend, affiliate, promotion, and fulfillment-capacity scenarios — complete
 5. **Decision experience:** executive forecast dashboard, CI, GitHub Pages, profile refresh, interview walkthrough — complete
+6. **Forecast operations:** latest-origin health checks, threshold alerts, monitoring evidence, dashboard feedback loop — complete
 
 ## Repository map
 
 ```text
-src/analytics_automation_platform/  history, contracts, metrics, forecasting, scenarios, dashboard, pipeline
-config/                             source, metric, forecast, and scenario contracts
+src/analytics_automation_platform/  history, contracts, metrics, forecasting, scenarios, monitoring, dashboard, pipeline
+config/                             source, metric, forecast, scenario, and monitoring contracts
 data/source/                        deterministic revenue, marketing, affiliate, and Day 1 fixtures
 sql/                                BigQuery reference transformation
-tests/                              contract, leakage, evaluation, scenario, dashboard, lineage, and reproducibility tests
+tests/                              contract, leakage, evaluation, scenario, monitoring, dashboard, lineage, and reproducibility tests
 artifacts/raw/                      validated source snapshots
 artifacts/marts/                    forecast-ready daily metric mart
 artifacts/                          quality, backtest, evaluation, forecast, and summary evidence
 site/                               dependency-free interactive executive dashboard and generated data contract
 .github/workflows/                  continuous integration and GitHub Pages deployment
-docs/                               architecture, modeling, scenarios, deployment, and interview walkthrough
+docs/                               architecture, modeling, scenarios, monitoring, deployment, and interview walkthrough
 ```
 
 ## AI-augmented build method
@@ -162,9 +180,11 @@ I use AI as an engineering multiplier for implementation, edge-case generation, 
 - Fulfillment scenarios use an explainable demand-gap heuristic rather than an inventory or warehouse network simulation.
 - Synthetic seasonality and driver relationships prove engineering behavior, not real-world forecast accuracy.
 - Scenarios are deterministic plan sensitivities; a production workflow would add plan ownership, approvals, and observed-versus-plan variance.
+- Monitoring replays the latest rolling-origin champion holdout; production would compare immutable forecast vintages with newly landed actuals on a schedule.
+- Thresholds are portfolio demonstration defaults and would require business-specific service levels and escalation ownership.
 - The public dashboard is static and intentionally contains no authentication or operational write controls.
 
-See [the revenue data foundation](docs/revenue-data-foundation.md) for signal design, [forecasting and evaluation](docs/forecasting-and-evaluation.md) for leakage controls and scorecards, [growth scenario analysis](docs/scenario-analysis.md) for decision boundaries, [deployment](docs/deployment.md) for CI and Pages, and the [interview walkthrough](docs/interview-walkthrough.md) for the concise project story.
+See [the revenue data foundation](docs/revenue-data-foundation.md) for signal design, [forecasting and evaluation](docs/forecasting-and-evaluation.md) for leakage controls and scorecards, [growth scenario analysis](docs/scenario-analysis.md) for decision boundaries, [forecast monitoring](docs/forecast-monitoring.md) for thresholds and response rules, [deployment](docs/deployment.md) for CI and Pages, and the [interview walkthrough](docs/interview-walkthrough.md) for the concise project story.
 
 ## License
 
