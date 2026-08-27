@@ -7,6 +7,7 @@ from .forecast_pipeline import run_forecast_pipeline
 from .history import generate_history
 from .ingestion import run_ingestion
 from .metrics import build_daily_metrics
+from .monitoring import build_forecast_monitoring
 from .scenario_pipeline import run_scenario_pipeline
 
 
@@ -17,6 +18,7 @@ def main() -> None:
     metric_summary = build_daily_metrics(root)
     forecast_summary = run_forecast_pipeline(root)
     scenario_summary = run_scenario_pipeline(root)
+    monitoring_summary = build_forecast_monitoring(root)
     dashboard_summary = build_dashboard_data(root)
     print(
         "Revenue data gate {gate}: {sources} sources, {rows} rows, "
@@ -43,6 +45,11 @@ def main() -> None:
     print(
         f"Scenario analysis: {scenario_summary['scenario_count']} plans across "
         f"{scenario_summary['horizon_days'][-1]} days"
+    )
+    print(
+        f"Forecast monitoring {monitoring_summary['overall_status']}: "
+        f"{monitoring_summary['alert_count']} alerts through "
+        f"{monitoring_summary['observed_through']}"
     )
     print(
         f"Dashboard ready through {dashboard_summary['forecast_end_date']}: "

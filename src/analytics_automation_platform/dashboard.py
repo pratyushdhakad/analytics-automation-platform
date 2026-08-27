@@ -29,6 +29,7 @@ def build_dashboard_data(root: Path) -> dict[str, Any]:
     scenarios = _read_json(root / "artifacts" / "scenario_summary.json")
     ingestion = _read_json(root / "artifacts" / "ingestion_manifest.json")
     metrics = _read_json(root / "artifacts" / "metric_summary.json")
+    monitoring = _read_json(root / "artifacts" / "forecast_monitoring.json")
     scenario_rows = _read_csv(root / "artifacts" / "scenario_forecasts.csv")
 
     daily: dict[str, dict[str, list[dict[str, object]]]] = {
@@ -91,6 +92,7 @@ def build_dashboard_data(root: Path) -> dict[str, Any]:
             "metric_check_count": metrics["quality_check_count"],
         },
         "model_health": model_health,
+        "monitoring": monitoring,
         "scenario_method": scenarios["method"],
         "interpretation": scenarios["interpretation"],
         "scenarios": scenario_cards,
