@@ -9,6 +9,7 @@ from analytics_automation_platform.forecast_pipeline import run_forecast_pipelin
 from analytics_automation_platform.history import generate_history
 from analytics_automation_platform.ingestion import run_ingestion, sha256_file
 from analytics_automation_platform.metrics import build_daily_metrics
+from analytics_automation_platform.monitoring import build_forecast_monitoring
 from analytics_automation_platform.scenario_pipeline import run_scenario_pipeline
 
 
@@ -23,6 +24,7 @@ def build_dashboard_root(path: Path) -> dict:
     build_daily_metrics(path)
     run_forecast_pipeline(path)
     run_scenario_pipeline(path)
+    build_forecast_monitoring(path)
     return build_dashboard_data(path)
 
 
@@ -62,6 +64,10 @@ class DashboardTests(unittest.TestCase):
             "seasonal_naive",
         )
 
+    def test_dashboard_exposes_monitoring_evidence(self):
+        self.assertEqual(self.dashboard["monitoring"]["overall_status"], "WATCH")
+        self.assertEqual(self.dashboard["monitoring"]["alert_count"], 1)
+
     def test_dashboard_data_contains_no_private_identifiers(self):
         payload = json.dumps(self.dashboard).lower()
         for prohibited in ("truly free", "@gmail", "@yahoo", "linkedin.com/in"):
@@ -75,6 +81,14 @@ class DashboardTests(unittest.TestCase):
         self.assertIn('src="app.js"', html)
         self.assertNotIn('src="http', html)
         self.assertNotIn('href="https://fonts.', html)
+
+    def test_static_page_surfaces_monitoring_and_alerts(self):
+        html = (ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        javascript = (ROOT / "site" / "app.js").read_text(encoding="utf-8")
+        self.assertIn('id="monitoring"', html)
+        self.assertIn('aria-labelledby="alert-heading"', html)
+        self.assertIn("renderMonitoring", javascript)
+        self.assertIn("monitor.alerts", javascript)
 
     def test_dashboard_output_is_byte_for_byte_reproducible(self):
         with tempfile.TemporaryDirectory() as directory:
