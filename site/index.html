@@ -22,6 +22,7 @@
         <a href="#overview">Overview</a>
         <a href="#scenarios">Scenarios</a>
         <a href="#models">Model health</a>
+        <a href="#monitoring">Monitoring</a>
         <a href="#method">Method</a>
       </nav>
       <a
@@ -131,6 +132,29 @@
         </article>
       </section>
 
+      <section class="panel monitoring-panel" id="monitoring">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Production feedback loop</p>
+            <h2>Forecast monitoring</h2>
+          </div>
+          <span class="monitor-badge" id="monitor-status">Loading health…</span>
+        </div>
+        <div class="monitor-layout">
+          <div>
+            <p class="panel-note monitor-note" id="monitor-note">Loading latest holdout evidence…</p>
+            <div class="monitor-cards" id="monitor-cards"></div>
+          </div>
+          <aside class="alert-feed" aria-labelledby="alert-heading">
+            <div class="alert-heading">
+              <h3 id="alert-heading">Automated alert feed</h3>
+              <span id="alert-count">—</span>
+            </div>
+            <div id="monitor-alerts"></div>
+          </aside>
+        </div>
+      </section>
+
       <section class="panel table-panel">
         <div class="panel-heading">
           <div>
@@ -164,11 +188,13 @@
           Each target keeps its best rolling-origin model. Scenario sensitivities
           add only the fitted driver delta to that champion baseline. Marketing
           and affiliate inputs are predictive planning signals, not causal ROAS.
-          Capacity changes shipment realization—not booked demand.
+          Capacity changes shipment realization—not booked demand. Monitoring
+          then checks error, bias, and interval coverage against versioned thresholds.
         </p>
         <div class="method-links">
           <a href="https://github.com/pratyushdhakad/analytics-automation-platform/blob/main/docs/forecasting-and-evaluation.md">Forecast evaluation ↗</a>
           <a href="https://github.com/pratyushdhakad/analytics-automation-platform/blob/main/docs/scenario-analysis.md">Scenario method ↗</a>
+          <a href="https://github.com/pratyushdhakad/analytics-automation-platform/blob/main/docs/forecast-monitoring.md">Monitoring runbook ↗</a>
         </div>
       </section>
     </main>

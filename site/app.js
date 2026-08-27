@@ -105,6 +105,44 @@ function renderModelHealth() {
     </article>`).join("");
 }
 
+function renderMonitoring() {
+  const monitor = dashboard.monitoring;
+  const alertLabels = {
+    absolute_bias_pct: "Absolute bias",
+    interval_coverage_pct: "Interval coverage",
+    wape_pct: "WAPE",
+  };
+  const badge = document.querySelector("#monitor-status");
+  badge.textContent = monitor.overall_status;
+  badge.dataset.status = monitor.overall_status;
+  document.querySelector("#monitor-note").textContent =
+    `Latest champion holdout: ${monitor.origin_date} origin · observed through ${monitor.observed_through} · ${monitor.primary_window_days}-day primary window`;
+  document.querySelector("#alert-count").textContent =
+    `${monitor.alert_count} ${monitor.alert_count === 1 ? "alert" : "alerts"}`;
+
+  document.querySelector("#monitor-cards").innerHTML = Object.values(monitor.targets).map((target) => {
+    const metrics = target.windows[`${monitor.primary_window_days}_days`];
+    return `<article class="monitor-card">
+      <header>
+        <div><h3>${target.label}</h3><span>${titleCase(target.champion)}</span></div>
+        <strong data-status="${target.status}">${target.status}</strong>
+      </header>
+      <dl>
+        <div><dt>WAPE</dt><dd>${metrics.wape_pct}%</dd></div>
+        <div><dt>Bias</dt><dd>${metrics.bias_pct > 0 ? "+" : ""}${metrics.bias_pct}%</dd></div>
+        <div><dt>Coverage</dt><dd>${metrics.interval_coverage_pct}%</dd></div>
+      </dl>
+    </article>`;
+  }).join("");
+
+  document.querySelector("#monitor-alerts").innerHTML = monitor.alerts.length
+    ? monitor.alerts.map((alert) => `<article class="alert-item" data-status="${alert.severity}">
+        <div><span>${alert.severity}</span><strong>${alertLabels[alert.metric] || titleCase(alert.metric)}</strong></div>
+        <p>${alert.message}</p>
+      </article>`).join("")
+    : `<p class="empty-alerts">No thresholds breached. Continue scheduled monitoring.</p>`;
+}
+
 function renderTable() {
   const base = horizonData("base_plan")[forecastKey()];
   const rows = dashboard.scenarios
@@ -150,6 +188,7 @@ async function init() {
     render();
   }));
   renderModelHealth();
+  renderMonitoring();
   render();
 }
 
