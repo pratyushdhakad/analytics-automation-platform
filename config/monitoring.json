@@ -1,0 +1,19 @@
+{
+  "monitor_version": "1.0.0",
+  "evaluation_window_days": [28, 56, 91],
+  "primary_window_days": 91,
+  "thresholds": {
+    "wape_pct": {
+      "watch": 10.0,
+      "critical": 15.0
+    },
+    "absolute_bias_pct": {
+      "watch": 8.0,
+      "critical": 12.0
+    },
+    "interval_coverage_pct": {
+      "watch_below": 85.0,
+      "critical_below": 75.0
+    }
+  }
+}
