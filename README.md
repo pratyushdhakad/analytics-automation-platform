@@ -4,6 +4,8 @@ A reliability-first analytics platform for forecasting revenue from seasonality,
 
 [**Open the executive dashboard →**](https://pratyushdhakad.github.io/analytics-automation-platform/)
 
+New to Git or GitHub? Read the [step-by-step beginner build journal](docs/beginner-build-journal.md) to see how the project moved from an empty repository to tested code, CI, GitHub Pages, and forecast monitoring.
+
 > Portfolio demonstration using deterministic synthetic data only. No employer, customer, or private operational data is included.
 
 ## Business question
