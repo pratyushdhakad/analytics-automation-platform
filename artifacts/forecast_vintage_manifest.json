@@ -1,0 +1,29 @@
+{
+  "append_only_status": "PASS",
+  "current_vintage_id": "vintage-20260820-f1_0_0",
+  "evaluation_as_of_utc": "2026-08-21T06:00:00Z",
+  "forecast_row_count": 1274,
+  "observed_row_count": 1092,
+  "observed_through": "2026-08-20",
+  "origins": [
+    "2026-01-01",
+    "2026-01-29",
+    "2026-02-26",
+    "2026-03-26",
+    "2026-04-23",
+    "2026-05-21",
+    "2026-08-20"
+  ],
+  "pending_row_count": 182,
+  "point_in_time_status": "PASS",
+  "source_sha256": {
+    "daily_revenue_metrics": "0e8532292045e418d7c770912e5f9ac9adaaafe7539ce71c7e90da621ebe893c",
+    "forecast_backtest": "353cab024dcdf4ccfb16a182b08c6155a548357c13c61d64f1ee851e808815fc",
+    "forecast_contract": "9b94c85cab794cac06f7b10bd4536660e1d5f1f6a3fd71acaca9ae5cb3c6e725",
+    "forecast_evaluation": "a0586ab2390f45a6595163dce5a095c192e4253b983f7b0b362feb0fcd122b98",
+    "revenue_forecast": "da4d7bccd824b3261156ea82157b4da08860576cf25794c1a0169b5d9a7fd96a",
+    "vintage_contract": "e32b4d7b13734a242961a5a450187badcb8809136f8951fa394950cd617abf2f"
+  },
+  "vintage_contract_version": "1.0.0",
+  "vintage_count": 7
+}
