@@ -14,7 +14,7 @@ The monitor turns out-of-sample forecast evidence into one of three states:
 
 This repository has no live actuals. The monitoring job therefore uses only the latest rolling-origin holdout and each target's selected champion model. The origin is 2026-05-21 and the 91-day observation window ends on 2026-08-20. Every monitored observation was outside the training data available at that origin.
 
-That makes the workflow an honest production-pattern demonstration. A deployed implementation would retain immutable forecast vintages and join them to actuals only after those actuals land.
+That makes the workflow an honest production-pattern demonstration. The project now retains deterministic immutable vintages and a separate point-in-time observation view. Monitoring still reads the latest rolling holdout directly; a later scheduled-operations increment will make it consume newly observed vintage rows.
 
 ## Versioned thresholds
 
@@ -50,8 +50,8 @@ The monitor writes `artifacts/forecast_monitoring.json` for machines and the das
 
 ## Production extension
 
-1. Persist forecasts with model version, run timestamp, origin, target, horizon, and interval bounds.
-2. Join only actuals that arrived after the forecast was issued.
+1. Move the demonstrated CSV vintage contract into a warehouse table with append-only permissions.
+2. Replace fixture timestamps with scheduler issue times and warehouse arrival times.
 3. Evaluate short and long horizons separately on a scheduled cadence.
 4. Route WATCH alerts to an analyst and CRITICAL alerts to the decision owner.
 5. Record acknowledgement, diagnosis, corrective action, and resolution time.
