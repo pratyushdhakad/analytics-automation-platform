@@ -2,7 +2,7 @@
 
 ## 30-second version
 
-I built a revenue forecasting control tower that separates data trust, forecast accuracy, scenario sensitivity, monitoring, and executive communication. It creates three years of deterministic synthetic sales, marketing, affiliate, and shipment history; validates six source contracts; compares seasonal and driver-aware models across six rolling origins; keeps a different champion for booked and shipped revenue; monitors the latest holdout for error, bias, and interval coverage; and turns seven operating plans into an interactive 13-week dashboard. The entire project is standard-library Python, tested, reproducible, and deployed through CI and GitHub Pages.
+I built a revenue forecasting control tower that separates data trust, forecast accuracy, forecast history, scenario sensitivity, monitoring, and executive communication. It creates three years of deterministic synthetic sales, marketing, affiliate, and shipment history; validates six source contracts; compares seasonal and driver-aware models across six rolling origins; preserves seven append-only forecast vintages; keeps future actuals pending until they are available; monitors the latest holdout; and turns seven operating plans into an interactive 13-week dashboard. The entire project is standard-library Python, tested, reproducible, and deployed through CI and GitHub Pages.
 
 ## Three-minute walkthrough
 
@@ -25,6 +25,8 @@ The base plan forecasts about $877.9K of 13-week net revenue. Seven versioned sc
 ### 5. Close the feedback loop
 
 The monitor evaluates the latest champion holdout against versioned WAPE, bias, and interval-coverage thresholds. Net revenue is HEALTHY. Shipped revenue is WATCH because it under-predicts actuals by 8.44%, so the alert routes an analyst to review plan, backlog, and capacity assumptions before the next refresh.
+
+Before monitoring, the pipeline also preserves six historical origins and the current run as seven immutable vintages. Its point-in-time view exposes 1,092 available historical outcomes and keeps all 182 current future outcomes blank and `PENDING`.
 
 ### 6. Explain the guardrails
 
@@ -50,7 +52,7 @@ No. It answers what forecast is consistent with a changed plan under learned his
 
 ### How would you productionize it?
 
-I would replace CSV extracts with partitioned warehouse models, snapshot original plans at each forecast origin, and persist immutable forecast vintages. The existing monitor would join each vintage to newly landed actuals, route WATCH and CRITICAL alerts through the orchestrator, and record acknowledgement and resolution. I would also add model-registry approval states, recalibrate intervals on held-out residuals, and publish the dashboard behind governed access.
+I would replace CSV extracts with partitioned warehouse models and move the demonstrated append-only vintage contract into a permissioned warehouse table. Scheduler issue times and warehouse arrival times would replace deterministic fixture timestamps. The monitor would consume newly observed vintage rows, route WATCH and CRITICAL alerts through the orchestrator, and record acknowledgement and resolution. I would also add model-registry approval states, recalibrate intervals on held-out residuals, and publish the dashboard behind governed access.
 
 ### What did AI do?
 
@@ -60,9 +62,10 @@ I used AI as an implementation and review multiplier: exploring architecture, ge
 
 1. Start in `README.md` for the business decision and scorecards.
 2. Run `make test` and `make run`.
-3. Open `config/forecasting.json`, `config/scenarios.json`, and `config/monitoring.json` to show explicit contracts.
+3. Open `config/forecasting.json`, `config/vintages.json`, `config/scenarios.json`, and `config/monitoring.json` to show explicit contracts.
 4. Show `artifacts/forecast_evaluation.json` for model-selection evidence.
-5. Show `artifacts/scenario_ranking.csv` for the operating decision.
-6. Show `artifacts/forecast_monitoring.json` and the automated WATCH alert.
-7. Open the live dashboard, switch between net and shipped revenue, and review the monitoring panel.
-8. Finish with `.github/workflows/ci.yml` to show reproducibility is enforced.
+5. Show `artifacts/forecast_vintage_manifest.json` and one `PENDING` current row for point-in-time integrity.
+6. Show `artifacts/scenario_ranking.csv` for the operating decision.
+7. Show `artifacts/forecast_monitoring.json` and the automated WATCH alert.
+8. Open the live dashboard, switch between net and shipped revenue, and review the monitoring panel.
+9. Finish with `.github/workflows/ci.yml` to show reproducibility is enforced.
