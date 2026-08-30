@@ -9,6 +9,7 @@ from .ingestion import run_ingestion
 from .metrics import build_daily_metrics
 from .monitoring import build_forecast_monitoring
 from .scenario_pipeline import run_scenario_pipeline
+from .vintages import build_forecast_vintages
 
 
 def main() -> None:
@@ -17,6 +18,7 @@ def main() -> None:
     manifest = run_ingestion(root)
     metric_summary = build_daily_metrics(root)
     forecast_summary = run_forecast_pipeline(root)
+    vintage_summary = build_forecast_vintages(root)
     scenario_summary = run_scenario_pipeline(root)
     monitoring_summary = build_forecast_monitoring(root)
     dashboard_summary = build_dashboard_data(root)
@@ -41,6 +43,11 @@ def main() -> None:
         "Forecast through {forecast_end_date}: champions={champions}".format(
             **forecast_summary
         )
+    )
+    print(
+        f"Forecast vintages {vintage_summary['append_only_status']}: "
+        f"{vintage_summary['vintage_count']} runs, "
+        f"{vintage_summary['pending_row_count']} pending rows"
     )
     print(
         f"Scenario analysis: {scenario_summary['scenario_count']} plans across "
