@@ -1,4 +1,4 @@
-.PHONY: generate ingest metrics forecast scenarios monitor dashboard run test
+.PHONY: generate ingest metrics forecast vintages scenarios monitor dashboard run test
 
 generate:
 	PYTHONPATH=src python3 -m analytics_automation_platform.history
@@ -12,7 +12,10 @@ metrics: ingest
 forecast: metrics
 	PYTHONPATH=src python3 -m analytics_automation_platform.forecast_pipeline
 
-scenarios: forecast
+vintages: forecast
+	PYTHONPATH=src python3 -m analytics_automation_platform.vintages
+
+scenarios: vintages
 	PYTHONPATH=src python3 -m analytics_automation_platform.scenario_pipeline
 
 monitor: scenarios
