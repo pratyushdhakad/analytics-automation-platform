@@ -44,6 +44,8 @@ The forecast-ready data foundation currently:
 - monitors the latest out-of-sample champion forecasts across 4-, 8-, and 13-week windows;
 - evaluates forecast WAPE, signed bias, and interval coverage against versioned health thresholds;
 - publishes deterministic HEALTHY, WATCH, or CRITICAL alerts with an explicit operator response;
+- retains seven append-only forecast vintages with explicit origin, issue, forecast, and model versions;
+- joins actuals only after their configured availability time and keeps 182 future outcomes pending;
 - enforces tests, pipeline reproduction, artifact freshness, and JavaScript validation in CI;
 - deploys the static dashboard through GitHub Pages; and
 - reproduces generated history, evaluation, forecasts, scenarios, and dashboard data byte for byte.
@@ -103,8 +105,11 @@ Generated outputs are written to `artifacts/`:
 - `forecast_backtest.csv` — 2,184 out-of-sample predictions and errors;
 - `forecast_evaluation.json` — 4-, 8-, and 13-week scorecards and champions;
 - `forecast_driver_plan.csv` — explicit future marketing, affiliate, event, and stockout assumptions;
-- `revenue_forecast.csv` — 91 daily forecasts per target with 90% intervals; and
+- `revenue_forecast.csv` — 91 daily forecasts per target with 90% intervals;
 - `forecast_summary.json` — executive horizon totals and prior-period comparisons;
+- `forecast_vintages.csv` — append-only historical and current forecast snapshots;
+- `forecast_vintage_observations.csv` — point-in-time actual joins with observed or pending status;
+- `forecast_vintage_manifest.json` — vintage counts, lineage hashes, and integrity decisions;
 - `forecast_monitoring.json` — latest-origin health status, thresholds, target scorecards, and alerts;
 - `forecast_alerts.csv` — operator-ready threshold breaches and response messages;
 - `scenario_forecasts.csv` — 1,274 daily scenario-target forecasts;
@@ -133,6 +138,8 @@ flowchart LR
     K --> M{Lowest 13-week WAPE by target}
     L --> M
     M --> N[Champion forecasts and intervals]
+    N --> U[Append-only forecast vintages]
+    U --> V[Point-in-time actual joins]
     N --> O[Versioned growth scenarios]
     O --> P[Net revenue and shipment comparison]
     M --> S[Latest champion holdout]
@@ -151,20 +158,27 @@ flowchart LR
 5. **Decision experience:** executive forecast dashboard, CI, GitHub Pages, profile refresh, interview walkthrough — complete
 6. **Forecast operations:** latest-origin health checks, threshold alerts, monitoring evidence, dashboard feedback loop — complete
 
+## Forecast Operations Apprenticeship
+
+1. **Immutable forecast vintages:** seven versioned runs, append-only identity checks, point-in-time actual joins, and leakage tests — complete
+2. **Champion/challenger registry:** governed candidate lifecycle and human promotion approval — next
+3. **Scheduled operations:** deterministic scheduled refresh, alert deduplication, acknowledgement, and weekly brief — planned
+4. **Warehouse and BI translation:** BigQuery-ready operations model and semantic-layer specification — planned
+
 ## Repository map
 
 ```text
-src/analytics_automation_platform/  history, contracts, metrics, forecasting, scenarios, monitoring, dashboard, pipeline
-config/                             source, metric, forecast, scenario, and monitoring contracts
+src/analytics_automation_platform/  history, contracts, metrics, forecasting, vintages, scenarios, monitoring, dashboard, pipeline
+config/                             source, metric, forecast, vintage, scenario, and monitoring contracts
 data/source/                        deterministic revenue, marketing, affiliate, and Day 1 fixtures
 sql/                                BigQuery reference transformation
-tests/                              contract, leakage, evaluation, scenario, monitoring, dashboard, lineage, and reproducibility tests
+tests/                              contract, leakage, evaluation, vintage, scenario, monitoring, dashboard, lineage, and reproducibility tests
 artifacts/raw/                      validated source snapshots
 artifacts/marts/                    forecast-ready daily metric mart
-artifacts/                          quality, backtest, evaluation, forecast, and summary evidence
+artifacts/                          quality, backtest, forecast, vintage, scenario, monitoring, and summary evidence
 site/                               dependency-free interactive executive dashboard and generated data contract
 .github/workflows/                  continuous integration and GitHub Pages deployment
-docs/                               architecture, modeling, scenarios, monitoring, deployment, and interview walkthrough
+docs/                               architecture, modeling, vintages, scenarios, monitoring, deployment, learning journal, and interview walkthrough
 ```
 
 ## AI-augmented build method
@@ -182,11 +196,13 @@ I use AI as an engineering multiplier for implementation, edge-case generation, 
 - Fulfillment scenarios use an explainable demand-gap heuristic rather than an inventory or warehouse network simulation.
 - Synthetic seasonality and driver relationships prove engineering behavior, not real-world forecast accuracy.
 - Scenarios are deterministic plan sensitivities; a production workflow would add plan ownership, approvals, and observed-versus-plan variance.
-- Monitoring replays the latest rolling-origin champion holdout; production would compare immutable forecast vintages with newly landed actuals on a schedule.
+- Vintage issue and actual-availability timestamps are deterministic fixtures; production would source them from the scheduler and warehouse.
+- Append-only behavior is demonstrated in a local CSV; production would enforce it with warehouse permissions or versioned object storage.
+- Monitoring still replays the latest rolling-origin champion holdout; a later increment will make it consume scheduled vintage observations directly.
 - Thresholds are portfolio demonstration defaults and would require business-specific service levels and escalation ownership.
 - The public dashboard is static and intentionally contains no authentication or operational write controls.
 
-See [the revenue data foundation](docs/revenue-data-foundation.md) for signal design, [forecasting and evaluation](docs/forecasting-and-evaluation.md) for leakage controls and scorecards, [growth scenario analysis](docs/scenario-analysis.md) for decision boundaries, [forecast monitoring](docs/forecast-monitoring.md) for thresholds and response rules, [deployment](docs/deployment.md) for CI and Pages, and the [interview walkthrough](docs/interview-walkthrough.md) for the concise project story.
+See [the revenue data foundation](docs/revenue-data-foundation.md) for signal design, [forecasting and evaluation](docs/forecasting-and-evaluation.md) for model leakage controls, [immutable forecast vintages](docs/forecast-vintages.md) for point-in-time correctness, [growth scenario analysis](docs/scenario-analysis.md) for decision boundaries, [forecast monitoring](docs/forecast-monitoring.md) for thresholds and response rules, [deployment](docs/deployment.md) for CI and Pages, and the [interview walkthrough](docs/interview-walkthrough.md) for the concise project story.
 
 ## License
 
